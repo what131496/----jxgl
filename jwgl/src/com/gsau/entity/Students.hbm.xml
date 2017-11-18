@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.gsau.entity.Students" table="students">
+		<id name="stu_id" column="stu_id" type="string" length="12">
+		   <generator class="assigned"></generator>
+		</id>
+		<property name="stu_name" column="stu_name" type="string"  length="30" not-null="true"/>
+		<property name="stu_sex" column="stu_sex" type="string" length="2"/>
+		<property name="stu_birth" column="stu_birth" type="date"></property>
+		<property name="stu_birthplace" column="stu_birthplace" type="string" length="30"/>
+		<property name="stu_email" column="stu_email" type="string" length="20"/>
+		<property name="stu_telephone" column="stu_telephone" type="string" length="11"/>
+		<property name="dept_id" column="dept_id" type="string" length="4"/>
+	</class>
+</hibernate-mapping>

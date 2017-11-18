@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.gsau.entity.UserDetails" table="UserDetails">
+		<id name="UserId" column="UserId" type="string" length="12">
+		   <generator class="assigned"></generator>
+		</id>
+		<property name="UserName" column="UserName" type="string"  length="30" not-null="true"/>
+		<property name="UserPass" column="UserPass" type="string"  length="30" not-null="true"/>
+		<property name="Role" column="Role" type="int" />
+	</class>
+</hibernate-mapping>

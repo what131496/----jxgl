@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.gsau.entity.Out_School" table="Out_School">
+		<id name="id" column="id" type="int" length="12">
+		   <generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"  length="20" not-null="true"/>
+		<property name="sex" column="sex" type="string" length="2"/>
+		<property name="phone" column="phone" type="string" length="12"/>
+		<property name="reason" column="reason" type="string" length="80"/>
+		<property name="place" column="place" type="string" length="50"/>
+		<property name="your_phone" column="your_phone" type="string" length="12"/>
+		<property name="relationship" column="relationship" type="string" length="12"/>
+		<property name="re_phone" column="re_phone" type="string" length="12"/>
+		<property name="leave_time" column="leave_time" type="string" length="20"/>
+		<property name="back_time" column="back_time" type="string" length="20"/>
+	</class>
+</hibernate-mapping>

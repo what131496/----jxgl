@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.gsau.entity.Teachers" table="Teachers">
+		<id name="teach_id" column="teach_id" type="string" length="12">
+		   <generator class="assigned"></generator>
+		</id>
+		<property name="teach_name" column="teach_name" type="string"  length="30" not-null="true"/>
+		<property name="teach_sex" column="teach_sex" type="string" length="2"/>
+		<property name="dept_id" column="dept_id" type="string" length="4"></property>
+		<property name="teach_birth" column="teach_birth" type="date"/>
+		<property name="teach_birthplace" column="teach_birthplace" type="string" length="30"/>
+		<property name="teach_email" column="teach_email" type="string" length="20"/>
+		<property name="teach_telephone" column="teach_telephone" type="string" length="11"/>
+		<property name="teach_professional" column="teach_professional" type="string" length="10"/>
+		<property name="teach_research" column="teach_research" type="string" length="10"/>
+	</class>
+</hibernate-mapping>

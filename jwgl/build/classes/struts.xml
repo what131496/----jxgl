@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+	<!-- 用户登录的处理，根据用户的身份判断并返回不同的视图 -->
+    	<action name="User_*" class="userAction" method="{1}">
+    		<result name="input">/login.jsp</result>
+    		<result name="success" type="redirect">/front/main.jsp</result>
+    		<result name="teacher" type="redirect">/front/teacher/main.jsp</result>
+    		<result name="admin" type="redirect">/front/administrator/main.jsp</result>
+    		<result name="findAll" >/front/administrator/information.jsp</result>
+    		<result name="edit" >/front/administrator/modify.jsp</result>
+    		<result name="update" type="redirectAction">User_findAll.action</result>
+    		<result name="delete" type="redirectAction">User_findAll.action</result>
+    		<result name="saveUI" >/front/administrator/add.jsp</result>
+    		<result name="save" type="redirectAction">User_findAll.action</result>
+    	</action >
+    	<!-- 学生信息的修改等处理 -->
+    	<action name="Students_*" class="studentsAction" method="{1}">
+    		<result name="findById">/front/information.jsp</result>
+    		<result name="find">/front/modify.jsp</result>
+    		<result name="update" type="redirectAction">Students_findById.action</result>
+    		<result name="updateAll" type="redirectAction">Students_findAll.action</result>
+    		<result name="findAll" >/front/administrator/studentsInformation.jsp</result>
+    		<result name="edit" >/front/administrator/modifyStudents.jsp</result>
+    		<result name="saveUI">/front/administrator/addStudents.jsp</result>
+    		<result name="save" type="redirectAction">Students_findAll.action</result>
+    		<result name="delete" type="redirectAction">Students_findAll.action</result>
+    	</action >
+    	<!-- 用户修改密码 -->
+    	<action name="modify_*" class="modifyAction" method="{1}">
+    		<result name="editStudents" type="redirect">/login.jsp</result>
+    		<result name="input">/front/modifyPass.jsp</result>
+    		<result name="inputeach">/front/teacher/modifyPass.jsp</result>
+    		<result name="editTeachers" type="redirect">/login.jsp</result>
+    		<result name="edit" type="redirect">/login.jsp</result>
+    	</action>
+    	
+    	<action name="Teachers_*" class="teachersAction" method="{1}">
+    		<result name="findById">/front/teacher/information.jsp</result>
+    		<result name="find">/front/teacher/modify.jsp</result>
+    		<result name="update" type="redirectAction">Teachers_findAll.action</result>
+    		<result name="findAll">/front/administrator/TeachInformation.jsp</result>
+    		<result name="saveUI">/front/administrator/addTeach.jsp</result>
+    		<result name="edit">/front/administrator/modifyTeach.jsp</result>
+    		<result name="save" type="redirectAction">Teachers_findAll.action</result>
+    		<result name="delete" type="redirectAction">Teachers_findAll.action</result>
+    		<result name="updateAll">Teachers_findAll.action</result>
+    		<result name="thisScore">/front/teacher/thisScore.jsp</result>
+    		<result name="thisCourses">/front/teacher/thisCourses.jsp</result>
+    		<result name="addScore">/front/teacher/addScore.jsp</result>
+    		<result name="addScores">/front/teacher/addScores.jsp</result>
+    	</action>
+    	<!-- Random验证码 --> 
+		<action name="Code" class="CodeAction"> 
+			<result type="stream"> 
+				<param name="contentType">image/jpeg</param> 
+				<param name="inputName">inputStream</param> 
+			</result> 
+		</action> 
+		
+		<action name="Courses_*" class="coursesAction" method="{1}">
+    		<result name="findAll">/front/courses/allCourses.jsp</result>
+    		<result name="findTotal">/front/courses/information.jsp</result>
+    		<result name="findSelect">/front/courses/informationSelect.jsp</result>
+    		<result name="findScore">/front/score/thisScore.jsp</result>
+    		<result name="add">/success.jsp</result>
+    		<result name="verify">/front/courses/verifyCourses.jsp</result>
+    		<result name="verifySuccess" type="redirectAction">/Courses_verify.action</result>
+    		<result name="modify">/front/courses/modify.jsp</result>
+    		<result name="update" type="redirectAction">Courses_findAll.action</result>
+    		<result name="delete" type="redirectAction">Courses_findAll.action</result>
+    		<result name="findByTeacher" >/front/teacher/Mycourses.jsp</result>
+    	</action>
+    	
+    	<action name="CourseScore_*" class="courseScoreAction" method="{1}">
+    		<result name="select">/front/courses/select.jsp</result>
+    		<result name="unselect" type="redirectAction">CourseScore_select.action</result>
+    	</action>
+    	<action name="Score_*" class="ScoreAction" method="{1}">
+    		<result name="save" type="redirectAction">Teachers_thisCourses.action</result>
+    		<result name="update">success.jsp</result>
+    		<result name="edit" type="redirectAction">Score_save.action</result>
+    	</action>
+    	<action name="export_*" class="exportAction" method="{1}">
+    		<result name="export">/success.jsp</result>
+    	</action>
+    	<action name="outSchool_*" class="outSchoolAction" method="{1}">
+    		<result name="save">/success.jsp</result>
+    		<result name="findAll">/front/students/outSchool.jsp</result>
+    	</action>
+    </package>
+    <package name="cms" abstract="true" extends="struts-default">
+    	<!-- 异常结果输出处理 -->
+    	<global-results>
+    		<result name="exception">exception.jsp</result>
+    	</global-results>
+    	<global-exception-mappings>
+    		<exception-mapping result="exception" exception="java.lang.Exception"/>
+    	</global-exception-mappings>
+    </package>
+</struts>

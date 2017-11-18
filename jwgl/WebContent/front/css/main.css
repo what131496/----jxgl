@@ -1,0 +1,33 @@
+/*此乃公共样式*/
+.commonWidth{width: 1260px; margin: 0 auto;}
+body{font-family: "微软雅黑";}
+/*登录页面*/
+.logon-box{width: 570px; height: 295px; border: 5px solid white;border-radius: 15px;
+ margin-top: 180px; margin-left: 390px;font-size: 15px;
+background-color:rgba(0 ,191, 255,0.15);}
+ .logon-box form{width: 380px; height: 220px;margin-top: 10px; margin-left: 200px;}
+ .logon-box input{ width: 210px; height: 22px; margin: 10px auto;}
+ .logon-box .paw{letter-spacing:4px;}
+ .logon-box b{ margin: 0 10px; font-weight: 500;}
+ .logon-box a{ margin: 6px; font-size: 16px;color: black;font-weight: 500;}
+ .logon-box a:hover{color: red;}
+ .logon-box .forget{font-size: 14px;color: ;}
+ .logon-box h2{ margin: 15px 0 5px 170px;font-weight: 600;color:white}
+ .logon-box .code{ width: 80px;}
+ .logon-box .logon-btn{ width: 60px;height:35px;margin: 10px 15px;
+  text-indent: 1px; font-size: 14px;background: rgb(91,198,255);font-weight: 600; 
+  cursor: pointer; color:black;border-radius: 8px;box-shadow: 0 3px #999}
+  .logon-box .logon-btn:hover{background-color:orange ;box-shadow: 0 5px #666;transform: translateY(2px);;}
+/*左侧部分*/
+.foot{ height: 50px; line-height: 50px;position:absolute;left:25px;top:490px;}
+/*信息显示部分*/
+.info{width:1000px; margin: 15px auto;}
+table{ text-align: center;margin: 10px auto;}
+.info thead{background:rgb(2,146,172);font-weight:500; color:white;font-size: 18px;}
+.info input{outline:none;height:25px;width:260px;text-indent:10px}
+.info .score{width:60px;cursor:pointer;color:white;background:rgb(115,167,107);text-indent:1px;font-weight:600}
+.btn_submint{ font-size: 15px; font-weight: bold; cursor: pointer;
+		color:white;background:rgb(115,167,107);letter-spacing:10px}
+.tableTiltle{font-weight:600;font-size:16px;background:rgb(115,167,107);
+         color:white;}
+

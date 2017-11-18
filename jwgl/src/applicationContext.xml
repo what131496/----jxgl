@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+    xmlns:cache="http://www.springframework.org/schema/cache"  
+    xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+      <!-- 引入外部属性文件 -->
+   <context:property-placeholder location="classpath:jdbc.properties"/>
+      <!-- 配置连接池 -->
+   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+   		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+   </bean>
+  <!--  配置Hibernate的相关属性 -->
+  <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置Hibernate属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true></prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 加载Hibernate中的映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/gsau/entity/Students.hbm.xml</value>
+				<value>com/gsau/entity/Courses.hbm.xml</value>
+				<value>com/gsau/entity/Courses_arrange.hbm.xml</value>
+				<value>com/gsau/entity/Departments.hbm.xml</value>
+				<value>com/gsau/entity/Teachers.hbm.xml</value>
+				<value>com/gsau/entity/UserDetails.hbm.xml</value>
+				<value>com/gsau/entity/Course_score.hbm.xml</value>  
+				<value>com/gsau/entity/Test.hbm.xml</value>  
+				<value>com/gsau/entity/Out_School.hbm.xml</value>
+			</list>
+		</property>
+	</bean>	
+   <!-- 配置action层 -->
+  		<bean id="userAction" class="com.gsau.action.UserAction" scope="prototype">
+  			<property name="userService" ref="userService"></property>
+  		</bean>
+  		<bean id="studentsAction" class="com.gsau.action.StudentsAction" scope="prototype">
+  			<property name="studentsService" ref="studentsService"></property>
+  		</bean>
+  		<bean id="modifyAction" class="com.gsau.action.ModifyPassAction" scope="prototype">
+  			<property name="userService" ref="userService"></property>
+  		</bean>
+  		<bean id="teachersAction" class="com.gsau.action.TeachersAction" scope="prototype">
+  			<property name="teachersService" ref="teachersService"></property>
+  		</bean>
+  		<bean id="CodeAction" class="com.gsau.action.CodeAction">
+  		</bean>
+  		<bean id="coursesAction" class="com.gsau.action.CoursesAction" scope="prototype">
+  			<property name="courseService" ref="courseService"></property>
+  			<property name="studentsService" ref="studentsService"></property>
+  		</bean>
+  		<bean id="courseScoreAction" class="com.gsau.action.CourseScoreAction" scope="prototype">
+  			<property name="courseScoreService" ref="courseScoreService"></property>
+  		</bean>
+  		<bean id="ScoreAction" class="com.gsau.action.ScoreAction" scope="prototype">
+  			<property name="ScoreService" ref="ScoreService"></property>
+  		</bean>
+  		<bean id="exportAction" class="com.gsau.action.exportAction" scope="prototype">
+  			<property name="outSchoolService" ref="outSchoolService"></property>
+  		</bean>
+  		<bean id="outSchoolAction" class="com.gsau.action.OutSchoolAction" scope="prototype">
+  			<property name="outSchoolService" ref="outSchoolService"></property>
+  		</bean>
+   <!-- 配置业务层service -->
+   		<bean id="userService" class="com.gsau.service.serviceImpl.UserServiceImpl">
+   			<property name="userDao" ref="userDao"></property>
+   		</bean>
+   		<bean id="studentsService" class="com.gsau.service.serviceImpl.StudentsServiceImpl">
+   			<property name="studentsDao" ref="studentsDao"></property>
+   		</bean>
+   		<bean id="teachersService" class="com.gsau.service.serviceImpl.TeachersServiceImpl">
+   			<property name="teachersDao" ref="teachersDao"></property>
+   		</bean>
+   		<bean id="courseService" class="com.gsau.service.serviceImpl.CoursesServiceImpl">
+   			<property name="coursesDao" ref="coursesDao"></property>
+   		</bean>
+   		<bean id="courseScoreService" class="com.gsau.service.serviceImpl.CourseScoreServiceImpl">
+   			<property name="courseScoreDao" ref="courseScoreDao"></property>
+   		</bean>
+   		<bean id="ScoreService" class="com.gsau.service.serviceImpl.ScoreServiceImpl">
+   			<property name="ScoreDao" ref="ScoreDao"></property>
+   		</bean>
+   		<bean id="outSchoolService" class="com.gsau.service.serviceImpl.OutSchoolServiceImpl">
+   			<property name="outSchoolDao" ref="outSchoolDao"></property>
+   		</bean>
+   <!-- 配置dao的类-->
+  		<bean id="userDao" class="com.gsau.dao.daoImpl.UserDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   		<bean id="studentsDao" class="com.gsau.dao.daoImpl.StudentsDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   		<bean id="teachersDao" class="com.gsau.dao.daoImpl.TeachersDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   		<bean id="coursesDao" class="com.gsau.dao.daoImpl.CoursesDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   		<bean id="courseScoreDao" class="com.gsau.dao.daoImpl.CourseScoreDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   		<bean id="ScoreDao" class="com.gsau.dao.daoImpl.ScoreDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   		<bean id="outSchoolDao" class="com.gsau.dao.daoImpl.OutSchoolDaoImpl">
+     		<property name="sessionFactory" ref="sessionFactory"/>
+   		</bean>
+   <!-- 配置Spring事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>	
+	</bean>
+	<!-- 开启注解式事务管理 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>	
+ </beans> 
+    

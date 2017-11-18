@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.gsau.entity.Courses" table="courses">
+		<id name="cour_id" column="cour_id" type="string" length="10">
+		   <generator class="assigned"></generator>
+		</id>
+		<property name="cour_name" column="cour_name" type="string"  length="30" not-null="true"/>
+		<property name="cour_hour" column="cour_hour" type="int"/>
+		<property name="semester" column="semester" type="int"/>
+		<property name="credit" column="credit" type="int"/>
+		<property name="type" column="type" type="int" />
+		<property name="flag" column="flag" type="int" />
+	</class>
+</hibernate-mapping>
